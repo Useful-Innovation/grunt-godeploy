@@ -1,9 +1,36 @@
-module.exports = function(grunt,config,data){
+function normalizeData(deploy){
+
+    function formatCommands(cmd){
+        Array.isArray(cmd) || (cmd = [cmd])
+        cmd  = cmd.filter(function(e){return e});
+
+        if(cmd.length){
+            cmd.unshift('cd ' + deploy.server.path)
+            cmd = 'sh -c "' + cmd.join('; ') + '"';
+        }
+
+        return cmd;
+    }
+
+    with (deploy.commands){
+        remote.before   = formatCommands(remote.before);
+        remote.after    = formatCommands(remote.after);
+        local.before    = formatCommands(local.before);
+        local.after     = formatCommands(local.after);
+    }
+
+    return deploy;
+}
+
+module.exports = function(grunt,config,configFile){
     // console.log(grunt,config.pkg);
     var tasks = [],
-        deploy = grunt.file.readJSON(data || 'deploy.json');
+        deploy = grunt.file.readJSON(configFile || 'deploy.json');
 
     deploy.server.agent = process.env.SSH_AUTH_SOCK;
+
+    deploy = normalizeData(deploy);
+    console.log(deploy.commands);
 
     config.sshexec = {};
     config.exec = {};
