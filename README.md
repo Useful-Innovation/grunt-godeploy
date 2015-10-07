@@ -9,7 +9,7 @@ Grunt powered deployment
 
  - Make sure Gruntfile.js is refactored so you have the config in a defined object. Then add the following:
 
-   `require('godeploy')(grunt,config);`
+   `require('grunt-godeploy')(grunt,config);`
 
  - Create a deploy.json
 
