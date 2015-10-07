@@ -3,11 +3,11 @@ Grunt powered deployment
 
 ## Usage
 
- - Add the following dependency to package.json:
+ - Add the dependency to package.json:
 
     `"grunt-godeploy": "git+ssh://git@github.com/Useful-Innovation/grunt-godeploy"`
 
- - Add the following dependency to Gruntfile:
+ - Load in Gruntfile:
 
     `grunt.loadNpmTasks('grunt-godeploy');`
 
