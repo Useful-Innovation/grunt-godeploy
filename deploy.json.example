@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "server": {
+        "host":       "123.123.123.123",
+        "port":       "22",
+        "username":   "deploy",
+        "path":       "/home/deploy/project"
+    },
+    "commands": {
+        "remote": {
+            "before": "",
+            "after":  ""
+        },
+        "local": {
+            "before": "",
+            "after":  ""
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
