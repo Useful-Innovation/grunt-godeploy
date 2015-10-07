@@ -11,7 +11,7 @@ Grunt powered deployment
 
    `require('godeploy')(grunt,config);`
 
- - Create a deploy.json (use example provided in this git)
+ - Create a deploy.json
 
  - Run `grunt godeploy` or use `godeploy` task in another task, for example a `deploy` task.
 
