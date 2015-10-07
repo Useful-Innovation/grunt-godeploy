@@ -18,5 +18,4 @@ Grunt powered deployment
 ## Notes
 
 ### Commands
- - Remote commands can be a string or an array of strings.
- - Local commands can only be a string, so concatenate with && if needed.
+ - Commands can be strings or arrays of strings. Remote commands runs in provided path and local commands runs in `./`.
