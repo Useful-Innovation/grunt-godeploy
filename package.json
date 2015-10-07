@@ -9,7 +9,8 @@
   },
   "author": "GoBrave",
   "license": "ISC",
-  "dependencies": {
+  "peerDependencies": {
+    "grunt": "~0.4.0",
     "grunt-exec": "^0.4.6",
     "grunt-rsync": "^0.6.2",
     "grunt-ssh": "^0.12.8"
