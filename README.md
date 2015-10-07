@@ -14,3 +14,9 @@ Grunt powered deployment
  - Create a deploy.json (use example provided in this git)
  
  - Run `grunt deploy`
+
+## Notes
+
+### Commands
+ - Remote commands can be a string or an array of strings.
+ - Local commands can only be a string, so concatenate with && if needed.
