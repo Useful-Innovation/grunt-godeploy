@@ -5,43 +5,48 @@ Grunt powered deployment
 
  - Add the following dependency to package.json:
 
-   `"grunt-godeploy": "git+ssh://git@github.com/Useful-Innovation/grunt-godeploy"`
+    `"grunt-godeploy": "git+ssh://git@github.com/Useful-Innovation/grunt-godeploy"`
 
- - Make sure Gruntfile.js is refactored so you have the config in a defined object. Then add the following:
+ - Add the following dependency to Gruntfile:
 
-   `require('grunt-godeploy')(grunt,config);`
+    `grunt.loadNpmTasks('grunt-godeploy');`
 
- - Create a deploy.json
+ - Configure deploy targets as described below
 
- - Run `grunt godeploy` or use `godeploy` task in another task, for example a `deploy` task.
 
-## deploy.json example
+## config example
 ```JSON
 {
-    "version": 1,
-    "server": {
-        "host":       "123.123.123.123",
-        "port":       "22",
-        "username":   "deploy",
-        "path":       "/home/deploy/myproject"
-    },
-    "commands": {
-        "remote": {
-            "before": "mkdir -p foobar",
-            "after":  ""
+    godeploy: {
+        options: { // Options for all deploy targets
+            src: './',
+            commands: {
+                remote: {
+                    before: "",
+                    after:  [
+                        "mkdir -p animals",
+                    ]
+                },
+                local: {
+                    before: "",
+                    after:  ""
+                }
+            },
+            exclude: [
+                "node_modules"
+            ]
         },
-        "local": {
-            "before": "",
-            "after":  ""
+        production: { // A deploy target
+            host:       "123.123.123.123",
+            port:       "22",
+            username:   "deploy",
+            dest:       "/home/deploy/project"
         }
-    },
-    "exclude": [
-        "node_modules"
-    ]
+    }
 }
 ```
 
 ## Notes
 
 ### Commands
- - Commands can be strings or arrays of strings. Remote commands runs in provided path and local commands runs in `./`.
+ - Commands can be strings or arrays of strings. Remote commands runs in provided destination and local commands runs in `./`.
