@@ -1,4 +1,4 @@
-# godeploy
+# grunt-godeploy
 Grunt powered deployment
 
 ## Usage
