@@ -13,6 +13,9 @@ Grunt powered deployment
 
  - Configure deploy targets as described below
 
+ - Deploy by running `grunt godeploy` or build a new task that includes `godeploy`.
+ - If you have multiple targets, run `grunt godeploy:production` to only deploy to a target named `production`
+
 
 ## config example
 ```javascript
