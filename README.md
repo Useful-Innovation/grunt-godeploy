@@ -15,7 +15,7 @@ Grunt powered deployment
 
 
 ## config example
-```JSON
+```javascript
 {
     godeploy: {
         options: { // Options for all deploy targets
