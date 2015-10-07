@@ -32,8 +32,9 @@ module.exports = function(grunt,config,configFile){
 
     deploy = normalizeData(deploy);
 
-    config.sshexec = {};
-    config.exec = {};
+    'sshexec'   in config || (config.sshexec = {});
+    'exec'      in config || (config.exec = {});
+    'confirm'   in config || (config.confirm = {});
 
     if(deploy.commands.local.before.length){
         config.exec.commands_local_before = deploy.commands.local.before;
@@ -83,9 +84,19 @@ module.exports = function(grunt,config,configFile){
         tasks.push('exec:commands_local_after');
     }
 
+    config.confirm.deploy = {
+        options: {
+            question: 'Are you sure you want to deploy to remote server? (y/n)',
+            input: '_key:y'
+        }
+    }
+
+    tasks.unshift('confirm:deploy');
+
     grunt.loadNpmTasks('grunt-ssh');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-rsync');
-console.log(tasks);
-    grunt.registerTask('deploy', 'Deploy project to production server', tasks);
+    grunt.loadNpmTasks('grunt-confirm');
+
+    grunt.registerTask('godeploy', 'Deploy project to production server', tasks);
 }
