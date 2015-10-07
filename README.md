@@ -40,8 +40,17 @@ Grunt powered deployment
             ]
         },
         production: { // A deploy target
+            options: { // target specific options
+                exclude: ['node_modules','some_path/']
+            }
             host:       "123.123.123.123",
             port:       "22",
+            username:   "deploy",
+            dest:       "/home/deploy/project"
+        },
+        staging: { // Another deploy target
+            host:       "231.231.231.231",
+            port:       "2200",
             username:   "deploy",
             dest:       "/home/deploy/project"
         }
