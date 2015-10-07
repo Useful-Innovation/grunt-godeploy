@@ -1,20 +1,22 @@
 function normalizeData(deploy){
 
-    function formatCommands(cmd){
+    function formatCommands(cmd,prependPath){
         Array.isArray(cmd) || (cmd = [cmd])
         cmd  = cmd.filter(function(e){return e});
 
         if(cmd.length){
-            cmd.unshift('cd ' + deploy.server.path)
+            prependPath && cmd.unshift('cd ' + prependPath)
             cmd = 'sh -c "' + cmd.join('; ') + '"';
+
+            return cmd;
         }
 
-        return cmd;
+        return false;
     }
 
     with (deploy.commands){
-        remote.before   = formatCommands(remote.before);
-        remote.after    = formatCommands(remote.after);
+        remote.before   = formatCommands(remote.before,deploy.server.path);
+        remote.after    = formatCommands(remote.after,deploy.server.path);
         local.before    = formatCommands(local.before);
         local.after     = formatCommands(local.after);
     }
@@ -23,14 +25,12 @@ function normalizeData(deploy){
 }
 
 module.exports = function(grunt,config,configFile){
-    // console.log(grunt,config.pkg);
     var tasks = [],
         deploy = grunt.file.readJSON(configFile || 'deploy.json');
 
     deploy.server.agent = process.env.SSH_AUTH_SOCK;
 
     deploy = normalizeData(deploy);
-    console.log(deploy.commands);
 
     config.sshexec = {};
     config.exec = {};
@@ -83,14 +83,9 @@ module.exports = function(grunt,config,configFile){
         tasks.push('exec:commands_local_after');
     }
 
-    var cwd = process.cwd();
-    process.chdir(__dirname);
-
     grunt.loadNpmTasks('grunt-ssh');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-rsync');
-
-    process.chdir(cwd);
-
+console.log(tasks);
     grunt.registerTask('deploy', 'Deploy project to production server', tasks);
 }
