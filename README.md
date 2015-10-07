@@ -1,7 +1,7 @@
 # godeploy
 Grunt powered deployment
 
-# Usage
+## Usage
 
  - Add the following dependency to package.json:
  
