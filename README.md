@@ -5,7 +5,7 @@ Grunt powered deployment
 
  - Add the following dependency to package.json:
 
-   `"godeploy": "git+ssh://git@github.com/Useful-Innovation/godeploy"`
+   `"grunt-godeploy": "git+ssh://git@github.com/Useful-Innovation/godeploy"`
 
  - Make sure Gruntfile.js is refactored so you have the config in a defined object. Then add the following:
 
