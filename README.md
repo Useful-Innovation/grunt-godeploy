@@ -45,13 +45,13 @@ Grunt powered deployment
             }
             host:       "123.123.123.123",
             port:       "22",
-            username:   "deploy",
+            user:       "deploy",
             dest:       "/home/deploy/project"
         },
         staging: { // Another deploy target
             host:       "231.231.231.231",
             port:       "2200",
-            username:   "deploy",
+            user:       "deploy",
             dest:       "/home/deploy/project"
         }
     }
