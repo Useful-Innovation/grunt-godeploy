@@ -2,9 +2,10 @@
 Grunt powered deployment
 
 ## Authentication
-Before using godeploy, you have to install your public ssh key on the server. To do this run:
+Before using godeploy, you have to install your public ssh key on the server. If you belong to the unfortunate ones(i.e. a disciple of Steve Jobs), you have to install ssh-copy-id: `brew install ssh-copy-id`. Run:
 
 `ssh-copy-id user@123.123.123.123`
+
 
 
 ## Usage
