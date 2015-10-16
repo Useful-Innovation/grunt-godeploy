@@ -1,6 +1,12 @@
 # grunt-godeploy
 Grunt powered deployment
 
+## Authentication
+Before using godeploy, you have to install your public ssh key on the server. To do this run:
+
+`ssh-copy-id user@123.123.123.123`
+
+
 ## Usage
 
  - Add the dependency to package.json:
