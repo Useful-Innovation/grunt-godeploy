@@ -33,7 +33,8 @@ module.exports = function(grunt) {
         // Merge default, task and target options.
         var options = this.options({
             src:        './',
-            args:       ['-ra'],
+            args:       ['-a'],
+            delete:     true,
             exclude:    [],
             commands:   {},
         });
@@ -50,7 +51,7 @@ module.exports = function(grunt) {
             port:       target.port,
             username:   target.user,
             agent:      process.env.SSH_AUTH_SOCK
-        }
+        };
 
         // Local before commands
         if((command = getCommands(commands,'local','before'))){

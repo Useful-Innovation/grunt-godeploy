@@ -33,8 +33,9 @@ In addition, a `commands` option is available. See example below.
 
 ```javascript
 {
-    src:        './',
-    args:       ['-ra'],
+    src:    './',   // Source is cwd
+    args:   ['-a'], // Use archive mode
+    delete: true    // Deletes objects in dest that aren't present in src. Ignores excludes.
 }
 ```
 
