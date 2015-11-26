@@ -24,7 +24,21 @@ Before using godeploy, you have to install your public ssh key on the server. If
  - If you have multiple targets, run `grunt godeploy:production` to only deploy to a target named `production`
 
 
-## config example
+## Options
+For all available options see [here](https://github.com/jedrichards/rsyncwrapper#options).
+
+In addition, a `commands` option is available. See example below.
+
+#### Default options
+
+```javascript
+{
+    src:        './',
+    args:       ['-ra'],
+}
+```
+
+## Config example
 ```javascript
 {
     godeploy: {

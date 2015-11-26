@@ -33,9 +33,13 @@ module.exports = function(grunt) {
         // Merge default, task and target options.
         var options = this.options({
             src:        './',
+            args:       ['-ra'],
+            exclude:    [],
             commands:   {},
-            exclude:    []
         });
+
+        var commands = options.commands;
+        delete options.commands;
 
         // Get target data
         var target = this.data;
@@ -49,13 +53,13 @@ module.exports = function(grunt) {
         }
 
         // Local before commands
-        if((command = getCommands(options.commands,'local','before'))){
+        if((command = getCommands(commands,'local','before'))){
             grunt.config.set('exec.commands_local_before',command);
             tasks.push('exec:commands_local_before');
         }
 
         // Remote before commands
-        if((command = getCommands(options.commands,'remote','before',target.dest))){
+        if((command = getCommands(commands,'remote','before',target.dest))){
             grunt.config.set('sshexec.commands_remote_before',{
                 command: command,
                 options: ssh
@@ -65,11 +69,7 @@ module.exports = function(grunt) {
 
         // The rsync
         grunt.config.set('rsync',{
-            options: {
-                args:       ['-ra','--delete-excluded'],
-                exclude:    options.exclude,
-                recursive:  true
-            },
+            options: options,
             deploy: {
                 options: {
                     src:    options.src,
@@ -83,7 +83,7 @@ module.exports = function(grunt) {
         tasks.push('rsync:deploy');
 
         // Remote after commands
-        if((command = getCommands(options.commands,'remote','after',target.dest))){
+        if((command = getCommands(commands,'remote','after',target.dest))){
             grunt.config.set('sshexec.commands_remote_after',{
                 command: command,
                 options: ssh
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
 
 
         // Local after commands
-        if((command = getCommands(options.commands,'local','after'))){
+        if((command = getCommands(commands,'local','after'))){
             grunt.config.set('exec.commands_local_after',command);
             tasks.push('exec:commands_local_after');
         }
